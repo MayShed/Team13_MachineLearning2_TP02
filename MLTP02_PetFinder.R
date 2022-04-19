@@ -175,11 +175,6 @@ rbind(eta_seq, acc_tune)
 #Load library
 library(e1071)
 
-# Set response variable as factor
-petFinder$AdoptionSpeed <- as.factor(AdoptionSpeed)
-test.petFinder$AdoptionSpeed <- as.factor(test.petFinder$AdoptionSpeed)
-train.petFinder$AdoptionSpeed <- as.factor(train.petFinder$AdoptionSpeed)
-
 # Initial model
 set.seed(100)
 svm.model1 <- svm(AdoptionSpeed~., data=petFinder, kernel="linear", cost=1)
@@ -239,7 +234,7 @@ print(confusion_matrix2)
 # 4  23 171 242 232 581
 
 # Accuracy:
-(acc_svm2_linear <- (76+853+64+581)/sum(confusion_matrix2)) # 0.3499333 = 34.99%
+(acc_svm2_linear <- (76+853+64+581)/sum(confusion_matrix2)) # 0.3499333 = 35.00%
 
 # Model with Radial kernel
 tune.svm.radial3 <- tune(svm, AdoptionSpeed~., data=train.petFinder, kernel="radial", ranges = list(cost = c(.01, .1, 1, 5)))
@@ -291,7 +286,7 @@ print(confusion_matrix4)
 #XGBoost1: 38.03%
 #XGboost2 with eta = 1.9: 39.84%
 #Initial SVM Model: 35.00%
-#SVM2 Linear with Cost 1: 34.99% 
+#SVM2 Linear with Cost 1: 35.00% 
 #SVM Radial with Cost 5: 38.92%
 #SVM Radial with Gamma 1: 34.92% 
 
